@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BrewGeoguesser | 3-Try Craft Beer Triangulation</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="app">
+
+    <!-- Sidebar / HUD Overlay -->
+    <aside id="sidebar">
+      
+      <!-- Brand Header -->
+      <header class="brand-header">
+        <div class="logo-wrapper">
+          <span class="logo-icon">🍺</span>
+          <div>
+            <h1>BrewGeoguesser</h1>
+            <p class="tagline">3-Try Craft Beer Triangulation Challenge</p>
+          </div>
+        </div>
+      </header>
+
+      <!-- 1. Region Selection Screen -->
+      <section id="region-screen" class="panel-section">
+        <h2 class="section-title">Select Discovery Region</h2>
+        <p class="section-desc">Choose a region to test your skills and discover amazing craft beers!</p>
+
+        <div class="region-grid">
+          <button class="region-card" data-region="NA">
+            <span class="flag-icon">🌎</span>
+            <div class="region-info">
+              <h3>North America</h3>
+              <span>United States, Canada & Mexico Craft Beers</span>
+            </div>
+          </button>
+
+          <button class="region-card" data-region="EU">
+            <span class="flag-icon">🌍</span>
+            <div class="region-info">
+              <h3>Europe</h3>
+              <span>UK, Germany, Belgium, Czechia & Netherlands</span>
+            </div>
+          </button>
+
+          <button class="region-card" data-region="WORLD">
+            <span class="flag-icon">🌐</span>
+            <div class="region-info">
+              <h3>The World <small class="difficulty-tag">Hard</small></h3>
+              <span>Global Craft Beers (NA, Europe, Australia, Japan & Beyond)</span>
+            </div>
+          </button>
+        </div>
+
+        <div class="rules-card">
+          <h4>🎯 3-Try Rules:</h4>
+          <ul>
+            <li>You get <strong>3 attempts</strong> per beer round to pinpoint the brewery.</li>
+            <li>Each try reports your <strong>Distance Off</strong> (no direction is given!).</li>
+            <li>Use your 3 distance clues to visually <strong>triangulate</strong> the brewery.</li>
+            <li>Hit within 5 miles for an instant <strong>5,000 pt Bullseye!</strong></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 2. Active Round Gameplay HUD -->
+      <section id="game-hud" class="panel-section hidden">
+        
+        <div class="hud-top-bar">
+          <div class="round-badge">
+            <span>Round</span>
+            <strong id="round-num">1</strong> / 5
+          </div>
+          <div class="score-badge">
+            <span>Total Score</span>
+            <strong id="total-score-display">0</strong> <small>pts</small>
+          </div>
+        </div>
+
+        <!-- Target Beer Prompt Card -->
+        <div class="target-beer-card">
+          <div class="beer-header-badge">
+            <span class="beer-icon">🍺</span>
+            <span id="target-beer-style" class="style-tag">Double IPA</span>
+          </div>
+          <h2 id="target-beer-name" class="beer-title">Pliny the Elder</h2>
+          <p class="beer-prompt-hint">Which brewery brews this craft beer?</p>
+        </div>
+
+        <!-- 3-Attempt Tracker & History -->
+        <div class="attempt-tracker-card">
+          <div class="tracker-header">
+            <span class="tracker-label">Attempts Remaining:</span>
+            <div class="attempt-pills">
+              <span id="try-pill-1" class="try-pill active">Try 1</span>
+              <span id="try-pill-2" class="try-pill">Try 2</span>
+              <span id="try-pill-3" class="try-pill">Try 3</span>
+            </div>
+          </div>
+
+          <!-- History Log of Previous Attempts -->
+          <div id="attempt-history" class="attempt-history">
+            <!-- Dynamically populated per try -->
+          </div>
+        </div>
+
+        <!-- Submit Guess Control Area -->
+        <div class="guess-control-card">
+          <div id="guess-prompt-text" class="prompt-text">
+            <span>📍 Click on the map to place your pin for <strong>Try #1</strong>!</span>
+          </div>
+          <button id="btn-submit-guess" class="btn btn-primary btn-submit" disabled>
+            <span id="submit-btn-text">Submit Try #1</span> 🎯
+          </button>
+        </div>
+
+        <button id="btn-change-country" class="btn-text">← Exit Game</button>
+      </section>
+
+    </aside>
+
+    <!-- Map Container -->
+    <main id="map-container">
+      <div id="map"></div>
+
+      <!-- Map Toast Notification -->
+      <div id="map-toast" class="map-toast hidden">
+        <span id="toast-message">Drop your pin on the map!</span>
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Post-Round Discovery Reveal Modal -->
+  <div id="reveal-modal" class="modal-backdrop hidden">
+    <div class="modal-content glass-card reveal-card">
+      
+      <div class="reveal-score-banner">
+        <div class="score-pill">
+          <span class="score-points" id="round-points-earned">+4,850 Pts</span>
+          <span class="score-distance" id="round-distance-text">Best Try: 12.4 miles off</span>
+        </div>
+      </div>
+
+      <div class="reveal-body">
+
+        <!-- NEW: Visual Beer Showcase (Bottle/Can + Poured Glass Visual) -->
+        <div class="beer-showcase-card">
+          <div id="beer-visual-container" class="beer-visual-container">
+            <!-- Dynamically populated with Bottle/Can + Glass artwork -->
+          </div>
+          <div class="beer-meta-pills">
+            <span id="reveal-beer-abv" class="meta-pill">⚡ 8.0% ABV</span>
+            <span id="reveal-beer-glass-type" class="meta-pill">🍺 Glass: Tulip</span>
+          </div>
+        </div>
+
+        <div class="reveal-header">
+          <span class="reveal-beer-icon">🍺</span>
+          <div>
+            <h2 id="reveal-beer-name">Pliny the Elder</h2>
+            <div id="reveal-brewery-name" class="reveal-brewery">Russian River Brewing Company</div>
+            <div id="reveal-location" class="reveal-location">📍 Santa Rosa, California</div>
+          </div>
+        </div>
+
+        <div class="reveal-description-box">
+          <h4>📜 Beer Discovery & History Notes:</h4>
+          <p id="reveal-description-text">Loading beer notes...</p>
+        </div>
+      </div>
+
+      <div class="reveal-footer">
+        <button id="btn-next-round" class="btn btn-primary btn-large">
+          <span>Next Round ➔</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- End of Game 5-Round Summary Modal -->
+  <div id="summary-modal" class="modal-backdrop hidden">
+    <div class="modal-content glass-card summary-card">
+      
+      <div class="modal-header">
+        <span id="summary-rank-icon" class="modal-emoji">🏆</span>
+        <h2 id="summary-rank-title">Master Brewmaster</h2>
+        <p id="summary-subtitle">You completed all 5 rounds!</p>
+      </div>
+
+      <div class="final-score-display">
+        <span class="final-num" id="summary-final-score">22,450</span>
+        <span class="final-max">/ 25,000 Pts</span>
+      </div>
+
+      <!-- Round Breakdown List -->
+      <ul id="summary-round-list" class="summary-round-list">
+        <!-- Dynamically populated -->
+      </ul>
+
+      <div class="modal-actions">
+        <button id="btn-play-again" class="btn btn-primary btn-large">🎮 Play Again</button>
+        <button id="btn-share-score" class="btn btn-secondary">📋 Share Result</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- External CDNs -->
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <!-- Turf.js JS -->
+  <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6.5.0/turf.min.js"></script>
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <!-- Application JS -->
+  <script src="app.js"></script>
+</body>
+</html>
