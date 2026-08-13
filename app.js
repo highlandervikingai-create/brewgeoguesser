@@ -481,13 +481,135 @@
       }
     ],
 
-    // 🌐 THE WORLD (Global Microbrewery Discovery)
+    // 🌐 THE WORLD (Global Microbrewery Discovery - NA, EU + Asian Craft Beers)
     WORLD: []
   };
 
   BEER_DATABASE.WORLD = [
     ...BEER_DATABASE.NA,
     ...BEER_DATABASE.EU,
+
+    // 🇯🇵 JAPAN CRAFT BEERS
+    {
+      id: 'asia-japan-yonayona',
+      beerName: 'Yona Yona Ale',
+      breweryName: 'Yo-Ho Brewing',
+      city: 'Karuizawa',
+      region: 'Nagano, Japan',
+      lat: 36.3400,
+      lon: 138.6000,
+      style: 'American Pale Ale',
+      abv: '5.5%',
+      glassType: 'Pint Glass',
+      packageType: 'can',
+      imageUrl: 'assets/yona_yona.jpg',
+      liquidColor: '#f59e0b',
+      description: 'Yona Yona ("Every Night") Ale is Japan\'s #1 iconic craft pale ale brewed in the mountains of Nagano. Packed with floral Cascade hop aromas, medium body, and crisp caramel malt balance.'
+    },
+    {
+      id: 'asia-japan-hitachino',
+      beerName: 'Hitachino Nest White Ale',
+      breweryName: 'Kiuchi Brewery',
+      city: 'Naka',
+      region: 'Ibaraki, Japan',
+      lat: 36.4526,
+      lon: 140.4851,
+      style: 'Japanese Witbier',
+      abv: '5.5%',
+      glassType: 'Chalice',
+      packageType: 'bottle',
+      imageUrl: 'assets/duvel.jpg',
+      liquidColor: '#fef08a',
+      description: 'Brewed by Kiuchi Brewery in Ibaraki, Japan (originally a sake brewery founded in 1823). Hitachino Nest White Ale is spiced with nutmeg, orange juice, coriander, and native Japanese citrus.'
+    },
+    {
+      id: 'asia-japan-minoh',
+      beerName: 'Minoh Imperial Stout',
+      breweryName: 'Minoh Beer',
+      city: 'Minoh / Osaka',
+      region: 'Kansai, Japan',
+      lat: 34.8267,
+      lon: 135.4705,
+      style: 'Imperial Stout',
+      abv: '8.5%',
+      glassType: 'Snifter',
+      packageType: 'bottle',
+      imageUrl: 'assets/stout.jpg',
+      liquidColor: '#1e1b18',
+      description: 'Founded in Minoh, Osaka by the Ohshita sisters. Minoh Stout is a multi-time World Beer Cup gold medal winner brimming with espresso roast and velvety dark cocoa.'
+    },
+    {
+      id: 'asia-japan-baird',
+      beerName: 'Rising Sun Pale Ale',
+      breweryName: 'Baird Brewing Company',
+      city: 'Izu / Shizuoka',
+      region: 'Chubu, Japan',
+      lat: 34.9750,
+      lon: 138.9300,
+      style: 'Japanese Craft Pale Ale',
+      abv: '5.5%',
+      glassType: 'Pint Glass',
+      packageType: 'bottle',
+      imageUrl: 'assets/pliny.jpg',
+      liquidColor: '#f59e0b',
+      description: 'Brewed with pristine subterranean spring water from Mount Fuji in Shizuoka, Japan. Unfiltered, crisp, and single-hopped with citrusy Cascade hops.'
+    },
+
+    // 🇻🇳 VIETNAM CRAFT BEERS
+    {
+      id: 'asia-vietnam-pasteur',
+      beerName: 'Jasmine IPA',
+      breweryName: 'Pasteur Street Brewing Co.',
+      city: 'Ho Chi Minh City',
+      region: 'Saigon, Vietnam',
+      lat: 10.7769,
+      lon: 106.7009,
+      style: 'Jasmine IPA',
+      abv: '6.5%',
+      glassType: 'Pint Glass',
+      packageType: 'bottle',
+      imageUrl: 'assets/pasteur.jpg',
+      liquidColor: '#f59e0b',
+      description: 'Crafted in Ho Chi Minh City, Vietnam. Infused with dried jasmine flowers harvested in Northern Vietnam alongside American Centennial and Citra hops for an intoxicating floral aroma.'
+    },
+
+    // 🇹🇭 THAILAND CRAFT BEERS
+    {
+      id: 'asia-thailand-chalawan',
+      beerName: 'Chalawan Pale Ale',
+      breweryName: 'FullMoon Brewworks',
+      city: 'Phuket',
+      region: 'Southern Thailand',
+      lat: 7.8804,
+      lon: 98.3923,
+      style: 'Thai Pale Ale',
+      abv: '4.7%',
+      glassType: 'Tulip Glass',
+      packageType: 'bottle',
+      imageUrl: 'assets/chalawan.jpg',
+      liquidColor: '#fbbf24',
+      description: 'Brewed on Patong Beach in Phuket, Thailand. Named after a legendary Thai crocodile king, featuring lychee, citrus, and bold tropical fruit flavors.'
+    },
+
+    // 🇮🇳 INDIA CRAFT BEERS
+    {
+      id: 'asia-india-bira91',
+      beerName: 'Bira 91 White Ale',
+      breweryName: 'Bira 91 (B9 Beverages)',
+      city: 'Bengaluru',
+      region: 'Karnataka, India',
+      lat: 12.9716,
+      lon: 77.5946,
+      style: 'Wheat Ale',
+      abv: '4.9%',
+      glassType: 'Chalice',
+      packageType: 'bottle',
+      imageUrl: 'assets/duvel.jpg',
+      liquidColor: '#fef08a',
+      description: 'Crafted in Bengaluru, India. A low-bitterness wheat beer brewed with orange peel, coriander, and Indian wheat for a refreshing citrus finish.'
+    },
+
+    // 🇦🇺 AUSTRALIA & NEW ZEALAND CRAFT BEERS
     {
       id: 'world-garageproject-pernicious',
       beerName: 'Pernicious Weed IPA',
@@ -519,22 +641,6 @@
       imageUrl: 'assets/pliny.jpg',
       liquidColor: '#f59e0b',
       description: 'Coopers is Australia\'s largest family-owned brewery, located in Adelaide. Original Pale Ale is naturally conditioned in the bottle with a signature cloudy yeast sediment.'
-    },
-    {
-      id: 'world-hitachino-nest',
-      beerName: 'Hitachino Nest White Ale',
-      breweryName: 'Kiuchi Brewery',
-      city: 'Naka',
-      region: 'Ibaraki, Japan',
-      lat: 36.4526,
-      lon: 140.4851,
-      style: 'Japanese Witbier',
-      abv: '5.5%',
-      glassType: 'Chalice',
-      packageType: 'bottle',
-      imageUrl: 'assets/duvel.jpg',
-      liquidColor: '#fef08a',
-      description: 'Brewed by Kiuchi Brewery in Ibaraki, Japan (originally a sake brewery founded in 1823). Hitachino Nest White Ale is spiced with nutmeg, orange juice, coriander, and native Japanese citrus.'
     },
     {
       id: 'world-balter-xpa',
@@ -734,7 +840,6 @@
   // Beer Showcase Renderer: Real Photographic Image OR Dynamic SVG Pair
   // ==========================================================================
   function renderBeerVisual(beer) {
-    // 1. If high-resolution real photographic photo exists, render real photo!
     if (beer.imageUrl) {
       return `
         <div class="photo-showcase-wrapper">
@@ -743,7 +848,6 @@
       `;
     }
 
-    // 2. Fallback to Dynamic Vector SVG Graphic
     const color = beer.liquidColor || '#f59e0b';
     const isCan = beer.packageType === 'can';
     const isDark = color === '#1e1b18' || color === '#18120c' || color === '#451a03';
