@@ -7,13 +7,118 @@
   'use strict';
 
   // ==========================================================================
-  // Craft Beer Discovery Databases (North America, Europe, World)
+  // Craft & Microbrewery Discovery Databases (Untappd-Inspired Library)
   // ==========================================================================
   const BEER_DATABASE = {
-    // 🌎 NORTH AMERICA (US, Canada, Mexico)
+    // 🌎 NORTH AMERICA (US, Canada, Mexico Microbreweries & Craft Taprooms)
     NA: [
       {
-        id: 'na-1',
+        id: 'na-treehouse-julius',
+        beerName: 'Julius IPA',
+        breweryName: 'Tree House Brewing Company',
+        city: 'Charlton',
+        region: 'Massachusetts, USA',
+        lat: 42.1287,
+        lon: -72.0195,
+        style: 'American IPA',
+        abv: '6.8%',
+        glassType: 'Tulip Glass',
+        packageType: 'can',
+        liquidColor: '#facc15',
+        description: 'Julius is Tree House\'s flagship IPA and an Untappd legend. Bursting with bright tropical fruit, mango, and peach flavors with a soft, pillowy mouthfeel from Charlton, Massachusetts.'
+      },
+      {
+        id: 'na-trillium-congress',
+        beerName: 'Congress Street IPA',
+        breweryName: 'Trillium Brewing Company',
+        city: 'Canton / Boston',
+        region: 'Massachusetts, USA',
+        lat: 42.1764,
+        lon: -71.1396,
+        style: 'New England IPA',
+        abv: '7.2%',
+        glassType: 'Tulip Glass',
+        packageType: 'can',
+        liquidColor: '#f59e0b',
+        description: 'Brewed in Canton and Boston, Massachusetts. Congress Street is Trillium\'s flagship Australian Galaxy-hopped IPA, overflowing with dank pine, passion fruit, and citrus zest.'
+      },
+      {
+        id: 'na-otherhalf-allgreen',
+        beerName: 'All Green Everything',
+        breweryName: 'Other Half Brewing Co.',
+        city: 'Brooklyn',
+        region: 'New York, USA',
+        lat: 40.6738,
+        lon: -73.9991,
+        style: 'Imperial IPA',
+        abv: '10.5%',
+        glassType: 'Snifter',
+        packageType: 'can',
+        liquidColor: '#eab308',
+        description: 'Brewed under the BQE in Brooklyn, New York. Other Half\'s "All Green Everything" is a colossal Triple IPA packed with Motueka, Amarillo, Citra, and Mosaic hops.'
+      },
+      {
+        id: 'na-monkish-foggier',
+        beerName: 'Foggier Window',
+        breweryName: 'Monkish Brewing Co.',
+        city: 'Torrance',
+        region: 'California, USA',
+        lat: 33.8361,
+        lon: -118.3114,
+        style: 'Double IPA',
+        abv: '8.1%',
+        glassType: 'Tulip Glass',
+        packageType: 'can',
+        liquidColor: '#facc15',
+        description: 'Cult microbrewery Monkish Brewing in Torrance, Southern California is famous for draw-the-line hazy DIPA releases. Foggier Window is double dry-hopped with Nelson Sauvin and Citra.'
+      },
+      {
+        id: 'na-toppling-pseudosue',
+        beerName: 'Pseudo Sue',
+        breweryName: 'Toppling Goliath Brewing Co.',
+        city: 'Decorah',
+        region: 'Iowa, USA',
+        lat: 43.3089,
+        lon: -91.7958,
+        style: 'Single-Hop Pale Ale',
+        abv: '5.8%',
+        glassType: 'Pint Glass',
+        packageType: 'can',
+        liquidColor: '#facc15',
+        description: 'Brewed in Decorah, Iowa and named after the famous T-Rex fossil. Pseudo Sue is a single-hop Citra pale ale roaring with grapefruit, mango, and evergreen aromas.'
+      },
+      {
+        id: 'na-equilibrium-mc2',
+        beerName: 'MC² (Energy)',
+        breweryName: 'Equilibrium Brewery',
+        city: 'Middletown',
+        region: 'New York, USA',
+        lat: 41.4457,
+        lon: -74.4231,
+        style: 'Double IPA',
+        abv: '8.0%',
+        glassType: 'Tulip Glass',
+        packageType: 'can',
+        liquidColor: '#fbbf24',
+        description: 'Equilibrium was founded by MIT scientists in Middletown, New York. MC² is their flagship DIPA using mass-balance water chemistry to achieve extreme citrus hop saturation.'
+      },
+      {
+        id: 'na-weldwerks-medianoche',
+        beerName: 'Medianoche Stout',
+        breweryName: 'WeldWerks Brewing Co.',
+        city: 'Greeley',
+        region: 'Colorado, USA',
+        lat: 40.4267,
+        lon: -104.6931,
+        style: 'Bourbon Barrel Stout',
+        abv: '13.5%',
+        glassType: 'Snifter',
+        packageType: 'bottle',
+        liquidColor: '#1e1b18',
+        description: 'WeldWerks in Greeley, Colorado is world-famous for Medianoche, a viscous imperial stout aged for over 18 months in premium bourbon barrels, overflowing with fudge, vanilla, and toasted coconut.'
+      },
+      {
+        id: 'na-pliny-elder',
         beerName: 'Pliny the Elder',
         breweryName: 'Russian River Brewing Company',
         city: 'Santa Rosa',
@@ -28,7 +133,7 @@
         description: 'Pliny the Elder is a world-renowned Double IPA packed with piney, resinous, and citrus hop aromas. Named after the Roman naturalist who first wrote about hops.'
       },
       {
-        id: 'na-2',
+        id: 'na-heady-topper',
         beerName: 'Heady Topper',
         breweryName: 'The Alchemist',
         city: 'Stowe',
@@ -40,10 +145,10 @@
         glassType: 'Tulip / Can Drink',
         packageType: 'can',
         liquidColor: '#facc15',
-        description: 'The Alchemist\'s Heady Topper is widely credited with launching the New England Hazy IPA revolution. Unfiltered, extremely aromatic, and famously instructed to "Drink from the Can!"'
+        description: 'The Alchemist\'s Heady Topper in Stowe, Vermont launched the New England Hazy IPA revolution. Unfiltered, extremely aromatic, and famously instructed to "Drink from the Can!"'
       },
       {
-        id: 'na-3',
+        id: 'na-unibroue-finmonde',
         beerName: 'La Fin du Monde',
         breweryName: 'Unibroue',
         city: 'Chambly',
@@ -58,7 +163,7 @@
         description: 'Brewed in Chambly, Quebec, La Fin du Monde ("End of the World") is an internationally acclaimed 9% ABV Belgian-style Tripel boasting champagne-like carbonation and floral spice notes.'
       },
       {
-        id: 'na-4',
+        id: 'na-driftwood-fattug',
         beerName: 'Fat Tug IPA',
         breweryName: 'Driftwood Brewery',
         city: 'Victoria',
@@ -73,7 +178,37 @@
         description: 'Fat Tug IPA is a legendary West Coast IPA from Victoria, BC. It delivers intense grapefruit, melon, and pine aromas with a robust malt backbone that defines Canadian craft brewing.'
       },
       {
-        id: 'na-5',
+        id: 'na-superflux-craft',
+        beerName: 'Superflux Craft IPA',
+        breweryName: 'Superflux Beer Company',
+        city: 'Vancouver',
+        region: 'British Columbia, Canada',
+        lat: 49.2827,
+        lon: -123.0874,
+        style: 'Hazy IPA',
+        abv: '6.5%',
+        glassType: 'Tulip Glass',
+        packageType: 'can',
+        liquidColor: '#facc15',
+        description: 'Superflux Beer Co. operates out of Vancouver\'s Eastside Craft District. Famous for ultra-fresh, experimental Hazy IPAs packed with modern Australian and New Zealand hop varieties.'
+      },
+      {
+        id: 'na-bellwoods-jellyking',
+        beerName: 'Jelly King Sour',
+        breweryName: 'Bellwoods Brewery',
+        city: 'Toronto',
+        region: 'Ontario, Canada',
+        lat: 43.6472,
+        lon: -79.4197,
+        style: 'Dry-Hopped Sour Ale',
+        abv: '5.6%',
+        glassType: 'Tulip Glass',
+        packageType: 'bottle',
+        liquidColor: '#fef08a',
+        description: 'Bellwoods Brewery on Ossington Ave in Toronto is a Canadian craft icon. Jelly King is a dry-hopped sour ale combining juicy tropical fruit funk with tart, refreshing acidity.'
+      },
+      {
+        id: 'na-minerva-stout',
         beerName: 'Minerva Imperial Stout',
         breweryName: 'Cervecería Minerva',
         city: 'Guadalajara',
@@ -88,7 +223,22 @@
         description: 'Crafted in Guadalajara, Jalisco, Minerva is a pioneer of Mexico\'s modern craft beer movement. Their Imperial Stout offers rich roasted cocoa, espresso, and silky dark chocolate flavors.'
       },
       {
-        id: 'na-6',
+        id: 'na-aguamala-astillero',
+        beerName: 'Astillero Imperial IPA',
+        breweryName: 'Cervecería Agua Mala',
+        city: 'Ensenada',
+        region: 'Baja California, Mexico',
+        lat: 31.8742,
+        lon: -116.6631,
+        style: 'Imperial West Coast IPA',
+        abv: '7.1%',
+        glassType: 'Pint Glass',
+        packageType: 'can',
+        liquidColor: '#f59e0b',
+        description: 'Agua Mala is a multi-award-winning coastal craft brewery in Ensenada, Baja California. Astillero is a crisp, resinous Imperial IPA brewed right on the Pacific ocean shore.'
+      },
+      {
+        id: 'na-bells-twohearted',
         beerName: 'Two Hearted Ale',
         breweryName: 'Bell\'s Brewery',
         city: 'Comstock',
@@ -103,7 +253,7 @@
         description: 'Bell\'s Two Hearted Ale is a staple of Midwest craft brewing. Brewed in Michigan with 100% Centennial hops, it is celebrated for its grapefruit aromas and clean malt structure.'
       },
       {
-        id: 'na-7',
+        id: 'na-3floyds-zombiedust',
         beerName: 'Zombie Dust',
         breweryName: '3 Floyds Brewing',
         city: 'Munster',
@@ -118,7 +268,7 @@
         description: 'Zombie Dust is an intensely hopped pale ale crafted in Munster, Indiana. It showcases the bright, tropical, and citrusy flavors of 100% Citra hops with an apocalyptic cult following.'
       },
       {
-        id: 'na-8',
+        id: 'na-allagash-white',
         beerName: 'Allagash White',
         breweryName: 'Allagash Brewing Company',
         city: 'Portland',
@@ -133,41 +283,176 @@
         description: 'Allagash White is an interpretation of a traditional Belgian wheat beer. Brewed in Portland, Maine, it features complex spice notes of coriander, Curaçao orange peel, and Belgian yeast.'
       },
       {
-        id: 'na-9',
-        beerName: 'Shiner Bock',
-        breweryName: 'Spoetzl Brewery',
-        city: 'Shiner',
-        region: 'Texas, USA',
-        lat: 29.4292,
-        lon: -97.1706,
-        style: 'German-Style Bock',
-        abv: '4.4%',
-        glassType: 'Stein / Pint',
-        packageType: 'bottle',
-        liquidColor: '#92400e',
-        description: 'Shiner Bock is a dark, smooth Bavarian-style amber bock brewed in Shiner, Texas. Spoetzl Brewery remains an independent staple of Lone Star state craft heritage since 1909.'
-      },
-      {
-        id: 'na-10',
-        beerName: 'Superflux Craft IPA',
-        breweryName: 'Superflux Beer Company',
-        city: 'Vancouver',
-        region: 'British Columbia, Canada',
-        lat: 49.2827,
-        lon: -123.0874,
-        style: 'Hazy IPA',
-        abv: '6.5%',
+        id: 'na-noda-juicyjay',
+        beerName: 'Juicy Jay',
+        breweryName: 'NoDa Brewing Company',
+        city: 'Charlotte',
+        region: 'North Carolina, USA',
+        lat: 35.2514,
+        lon: -80.8122,
+        style: 'East Coast IPA',
+        abv: '6.3%',
         glassType: 'Tulip Glass',
         packageType: 'can',
-        liquidColor: '#facc15',
-        description: 'Superflux Beer Co. operates out of Vancouver\'s Eastside Craft District. Famous for ultra-fresh, experimental Hazy IPAs packed with modern Australian and New Zealand hop varieties.'
+        liquidColor: '#f59e0b',
+        description: 'Juicy Jay is a fruit-forward East Coast IPA packed with El Dorado, Mosaic, and Citra hops. It is the flagship craft beer of Charlotte, North Carolina\'s historic arts district.'
+      },
+      {
+        id: 'na-creature-tropicalia',
+        beerName: 'Tropicalia IPA',
+        breweryName: 'Creature Comforts Brewing',
+        city: 'Athens',
+        region: 'Georgia, USA',
+        lat: 33.9598,
+        lon: -83.3779,
+        style: 'Fruit-Forward IPA',
+        abv: '6.6%',
+        glassType: 'Pint Glass',
+        packageType: 'can',
+        liquidColor: '#fbbf24',
+        description: 'Brewed in a historic downtown Athens, Georgia building. Tropicalia is a soft, juicy IPA bursting with passion fruit, ripe mango, and citrus hop aromas.'
+      },
+      {
+        id: 'na-elysian-spacedust',
+        beerName: 'Space Dust IPA',
+        breweryName: 'Elysian Brewing',
+        city: 'Seattle',
+        region: 'Washington, USA',
+        lat: 47.6142,
+        lon: -122.3168,
+        style: 'Imperial IPA',
+        abv: '8.2%',
+        glassType: 'Tulip Glass',
+        packageType: 'bottle',
+        liquidColor: '#f59e0b',
+        description: 'Brewed in the Capitol Hill district of Seattle, Washington. Space Dust is an out-of-this-world IPA with sweet grapefruit, mango, and pine hop bitterness.'
+      },
+      {
+        id: 'na-deschutes-freshsqueezed',
+        beerName: 'Fresh Squeezed IPA',
+        breweryName: 'Deschutes Brewery',
+        city: 'Bend',
+        region: 'Oregon, USA',
+        lat: 44.0504,
+        lon: -121.3218,
+        style: 'Juicy IPA',
+        abv: '6.4%',
+        glassType: 'Nonic Pint',
+        packageType: 'bottle',
+        liquidColor: '#f59e0b',
+        description: 'Brewed on the banks of the Deschutes River in Bend, Oregon. Fresh Squeezed uses heavy doses of Citra and Mosaic hops to mimic freshly squeezed citrus juice.'
       }
     ],
 
-    // 🌍 EUROPE (UK, Germany, Belgium, Czechia, Netherlands, Ireland)
+    // 🌍 EUROPE (UK, Germany, Belgium, Czechia, Netherlands, Ireland, Scandinavia Microbreweries)
     EU: [
       {
-        id: 'eu-1',
+        id: 'eu-cantillon-fou',
+        beerName: 'Fou\' Foune Lambic',
+        breweryName: 'Brasserie Cantillon',
+        city: 'Brussels',
+        region: 'Brussels-Capital, Belgium',
+        lat: 50.8416,
+        lon: 4.3353,
+        style: 'Apricot Lambic (Gueuze)',
+        abv: '5.0%',
+        glassType: 'Tulip Glass',
+        packageType: 'bottle',
+        liquidColor: '#fbbf24',
+        description: 'Brasserie Cantillon in Anderlecht, Brussels is the holy grail of spontaneous fermentation. Fou\' Foune is a world-renowned lambic aged on Bergeron apricots in oak casks.'
+      },
+      {
+        id: 'eu-3fonteinen-geuze',
+        beerName: 'Oude Geuze Vintage',
+        breweryName: 'Brouwerij 3 Fonteinen',
+        city: 'Beersel',
+        region: 'Flemish Brabant, Belgium',
+        lat: 50.7681,
+        lon: 4.3015,
+        style: 'Oude Geuze',
+        abv: '6.0%',
+        glassType: 'Tulip Glass',
+        packageType: 'bottle',
+        liquidColor: '#facc15',
+        description: 'Brouwerij 3 Fonteinen in Beersel, Belgium blends 1, 2, and 3-year-old lambics aged in oak barrels. Highly prized by Untappd sours enthusiasts for wild funk and crisp tart acidity.'
+      },
+      {
+        id: 'eu-deya-steady',
+        beerName: 'Steady Rolling Man',
+        breweryName: 'DEYA Brewing Company',
+        city: 'Cheltenham',
+        region: 'Gloucestershire, England',
+        lat: 51.8953,
+        lon: -2.0885,
+        style: 'Pale Ale',
+        abv: '5.2%',
+        glassType: 'Nonic Pint',
+        packageType: 'can',
+        liquidColor: '#facc15',
+        description: 'DEYA in Cheltenham, England produces Untappd\'s highest-rated British pale ale. Steady Rolling Man is soft, juicy, and immensely drinkable with Mosaic and Citra hop saturation.'
+      },
+      {
+        id: 'eu-verdant-lightbulb',
+        beerName: 'Lightbulb Pale Ale',
+        breweryName: 'Verdant Brewing Co.',
+        city: 'Penryn',
+        region: 'Cornwall, England',
+        lat: 50.1685,
+        lon: -5.1092,
+        style: 'Extra Pale Ale',
+        abv: '4.5%',
+        glassType: 'Craft Pint',
+        packageType: 'can',
+        liquidColor: '#fef08a',
+        description: 'Brewed on the coast of Cornwall, England. Verdant is famed for hazy, hop-saturated craft beers. Lightbulb is an extra pale ale with citrus pith and tropical fruit notes.'
+      },
+      {
+        id: 'eu-cloudwater-chubbles',
+        beerName: 'Chubbles DIPA',
+        breweryName: 'Cloudwater Brew Co.',
+        city: 'Manchester',
+        region: 'Greater Manchester, England',
+        lat: 53.4756,
+        lon: -2.2281,
+        style: 'Double IPA',
+        abv: '8.0%',
+        glassType: 'Tulip Glass',
+        packageType: 'can',
+        liquidColor: '#f59e0b',
+        description: 'Cloudwater in Manchester, England is a global craft beer titan. Chubbles is a collaboration DIPA loaded with oats, wheat, and massive dry hops for an intensely juicy texture.'
+      },
+      {
+        id: 'eu-westvleteren-12',
+        beerName: 'Westvleteren XII',
+        breweryName: 'Brouwerij De Sint-Sixtus',
+        city: 'Vleteren',
+        region: 'West Flanders, Belgium',
+        lat: 50.8959,
+        lon: 2.7214,
+        style: 'Belgian Quadrupel',
+        abv: '10.2%',
+        glassType: 'Trappist Chalice',
+        packageType: 'bottle',
+        liquidColor: '#451a03',
+        description: 'Brewed by Trappist monks at Saint Sixtus Abbey in Vleteren, Belgium. Frequently voted the #1 beer in the world, featuring notes of dark fig, raisin, plum, and dark sugar.'
+      },
+      {
+        id: 'eu-moersleutel-motoroil',
+        beerName: 'Motor Oil Imperial Stout',
+        breweryName: 'Moersleutel Craft Brewery',
+        city: 'Alkmaar',
+        region: 'North Holland, Netherlands',
+        lat: 52.6458,
+        lon: 4.7731,
+        style: 'Russian Imperial Stout',
+        abv: '12.0%',
+        glassType: 'Snifter',
+        packageType: 'can',
+        liquidColor: '#18120c',
+        description: 'Moersleutel ("Wrench") in Alkmaar, Netherlands was founded by four engineer brothers. Motor Oil is a pitch-black, thick 12% stout brimming with dark chocolate and espresso roast.'
+      },
+      {
+        id: 'eu-brewdog-punk',
         beerName: 'Punk IPA',
         breweryName: 'BrewDog',
         city: 'Ellon',
@@ -182,7 +467,7 @@
         description: 'BrewDog\'s Punk IPA is the craft beer that sparked a craft revolution across Great Britain. Brewed in Ellon, Aberdeenshire, it bursts with tropical fruit, caramel, and a sharp bitter finish.'
       },
       {
-        id: 'eu-2',
+        id: 'eu-rothaus-pils',
         beerName: 'Rothaus Tannenzäpfle Pils',
         breweryName: 'Badische Staatsbrauerei Rothaus',
         city: 'Grafenhausen',
@@ -197,7 +482,7 @@
         description: 'Brewed high in Germany\'s Black Forest since 1791. Tannenzäpfle ("Little Pine Cone") is a legendary German Pilsner brewed with spring water and Tettnang and Hallertau hops.'
       },
       {
-        id: 'eu-3',
+        id: 'eu-duvel-golden',
         beerName: 'Duvel Belgian Strong Ale',
         breweryName: 'Duvel Moortgat',
         city: 'Puurs-Sint-Amands',
@@ -212,7 +497,7 @@
         description: 'Duvel ("Devil") is an iconic 8.5% ABV Belgian golden ale. Re-fermented in the bottle in Puurs, Belgium, it is celebrated for its huge rocky head, effervescence, and subtle hop bitterness.'
       },
       {
-        id: 'eu-4',
+        id: 'eu-urquell-pilsner',
         beerName: 'Pilsner Urquell',
         breweryName: 'Plzeňský Prazdroj',
         city: 'Plzeň',
@@ -227,7 +512,7 @@
         description: 'The world\'s first golden pilsner lager, created in Plzeň, Czech Republic in 1842. Brewed with Czech Saaz hops and soft Bohemian spring water.'
       },
       {
-        id: 'eu-5',
+        id: 'eu-guinness-stout',
         beerName: 'Guinness Extra Stout',
         breweryName: 'St. James\'s Gate Brewery',
         city: 'Dublin',
@@ -242,22 +527,7 @@
         description: 'Brewed at historic St. James\'s Gate in Dublin, Ireland under a famous 9,000-year lease signed in 1759. Iconic for its dark ruby color, roasted barley, and velvety creamy head.'
       },
       {
-        id: 'eu-6',
-        beerName: 'Jaipur IPA',
-        breweryName: 'Thornbridge Brewery',
-        city: 'Bakewell',
-        region: 'Derbyshire, England',
-        lat: 53.2183,
-        lon: -1.6842,
-        style: 'American IPA',
-        abv: '5.9%',
-        glassType: 'Nonic Pint',
-        packageType: 'can',
-        liquidColor: '#f59e0b',
-        description: 'Thornbridge Jaipur is widely regarded as the beer that kicked off the modern UK IPA movement. Brewed in Bakewell, Derbyshire, it is celebrated for its citrus, passion fruit, and honey malt balance.'
-      },
-      {
-        id: 'eu-7',
+        id: 'eu-uiltje-trackdown',
         beerName: 'Uiltje Trackdown IPA',
         breweryName: 'Uiltje Brewing Company',
         city: 'Haarlem',
@@ -272,23 +542,38 @@
         description: 'Uiltje ("Little Owl") crafts vibrant, hop-forward beers in Haarlem, Netherlands. Trackdown is an aromatic, juicy IPA featuring playful comic art and fresh European hop innovations.'
       },
       {
-        id: 'eu-8',
-        beerName: 'Schneider Weisse Tap 7',
-        breweryName: 'Schneider Weisse',
-        city: 'Kelheim',
-        region: 'Bavaria, Germany',
-        lat: 48.9179,
-        lon: 11.8741,
-        style: 'Bavarian Weissbier',
-        abv: '5.4%',
-        glassType: 'Weizen Glass',
+        id: 'eu-mikkeller-beergeek',
+        beerName: 'Beer Geek Breakfast Stout',
+        breweryName: 'Mikkeller',
+        city: 'Copenhagen',
+        region: 'Capital Region, Denmark',
+        lat: 55.6712,
+        lon: 12.5601,
+        style: 'Oatmeal Coffee Stout',
+        abv: '7.5%',
+        glassType: 'Snifter',
         packageType: 'bottle',
-        liquidColor: '#b45309',
-        description: 'Brewed according to the original 1872 Bavarian recipe in Kelheim, Germany. An unfiltered wheat beer bursting with clove, banana, and nutmeg aromas.'
+        liquidColor: '#18120c',
+        description: 'Mikkeller in Copenhagen, Denmark is one of the world\'s premiere gypsy/craft breweries. Beer Geek Breakfast is brewed with gourmet French-press coffee and dark roasted malt.'
+      },
+      {
+        id: 'eu-lervig-supreme',
+        beerName: 'Tasty Juice IPA',
+        breweryName: 'Lervig Brewery',
+        city: 'Stavanger',
+        region: 'Rogaland, Norway',
+        lat: 58.9700,
+        lon: 5.7331,
+        style: 'Hazy DIPA',
+        abv: '8.0%',
+        glassType: 'Tulip Glass',
+        packageType: 'can',
+        liquidColor: '#facc15',
+        description: 'Lervig in Stavanger, Norway is a Scandinavian craft brewing leader. Tasty Juice is an unfiltered double IPA double-dry-hopped with Citra for massive tropical aroma.'
       }
     ],
 
-    // 🌐 THE WORLD (Global Craft Discovery)
+    // 🌐 THE WORLD (Global Microbrewery Discovery)
     WORLD: []
   };
 
@@ -296,7 +581,22 @@
     ...BEER_DATABASE.NA,
     ...BEER_DATABASE.EU,
     {
-      id: 'world-1',
+      id: 'world-garageproject-pernicious',
+      beerName: 'Pernicious Weed IPA',
+      breweryName: 'Garage Project',
+      city: 'Wellington',
+      region: 'North Island, New Zealand',
+      lat: -41.2952,
+      lon: 174.7725,
+      style: 'New Zealand IPA',
+      abv: '8.0%',
+      glassType: 'Tulip Glass',
+      packageType: 'can',
+      liquidColor: '#f59e0b',
+      description: 'Garage Project operates out of a converted 1970s petrol station in Wellington, NZ. Pernicious Weed is packed with Nelson Sauvin and Riwaka hops for intense passion fruit aromas.'
+    },
+    {
+      id: 'world-coopers-pale',
       beerName: 'Coopers Original Pale Ale',
       breweryName: 'Coopers Brewery',
       city: 'Adelaide',
@@ -311,7 +611,7 @@
       description: 'Coopers is Australia\'s largest family-owned brewery, located in Adelaide. Original Pale Ale is naturally conditioned in the bottle with a signature cloudy yeast sediment.'
     },
     {
-      id: 'world-2',
+      id: 'world-hitachino-nest',
       beerName: 'Hitachino Nest White Ale',
       breweryName: 'Kiuchi Brewery',
       city: 'Naka',
@@ -326,7 +626,7 @@
       description: 'Brewed by Kiuchi Brewery in Ibaraki, Japan (originally a sake brewery founded in 1823). Hitachino Nest White Ale is spiced with nutmeg, orange juice, coriander, and native Japanese citrus.'
     },
     {
-      id: 'world-3',
+      id: 'world-balter-xpa',
       beerName: 'Balter XPA',
       breweryName: 'Balter Brewing Company',
       city: 'Currumbin',
@@ -341,7 +641,7 @@
       description: 'Founded by world champion pro surfers on Australia\'s Gold Coast. Balter XPA is a multi-award-winning tropical pale ale bursting with floral, citrus, and passion fruit hop aromas.'
     },
     {
-      id: 'world-4',
+      id: 'world-wals-petroleum',
       beerName: 'Wäls Petroleum Stout',
       breweryName: 'Cervejaria Wäls',
       city: 'Belo Horizonte',
@@ -354,11 +654,26 @@
       packageType: 'bottle',
       liquidColor: '#18120c',
       description: 'Cervejaria Wäls is a world-renowned craft brewery in Belo Horizonte, Brazil. Petroleum is a viscous 12% ABV Imperial Stout infused with Belgian cocoa nibs and roasted coffee.'
+    },
+    {
+      id: 'world-minoh-stout',
+      beerName: 'Minoh Imperial Stout',
+      breweryName: 'Minoh Beer',
+      city: 'Minoh / Osaka',
+      region: 'Kansai, Japan',
+      lat: 34.8267,
+      lon: 135.4705,
+      style: 'Imperial Stout',
+      abv: '8.5%',
+      glassType: 'Snifter',
+      packageType: 'bottle',
+      liquidColor: '#1e1b18',
+      description: 'Founded in Minoh, Osaka by the Ohshita sisters. Minoh Stout is a multi-time World Beer Cup gold medal winner brimming with espresso roast and velvety dark cocoa.'
     }
   ];
 
   // ==========================================================================
-  // Global Game State
+  // Global Game State & Session Duplicate Prevention Tracker
   // ==========================================================================
   const state = {
     map: null,
@@ -367,6 +682,9 @@
     totalScore: 0,
     roundsData: [],
     currentBeer: null,
+    
+    // Session Tracker to Prevent Duplicate Beers across Replays
+    playedBeerIds: new Set(),
     
     // 3-Try Round State
     attemptIndex: 1,
@@ -522,49 +840,36 @@
   function renderBeerVisual(beer) {
     const color = beer.liquidColor || '#f59e0b';
     const isCan = beer.packageType === 'can';
-    const isDark = color === '#1e1b18' || color === '#18120c';
+    const isDark = color === '#1e1b18' || color === '#18120c' || color === '#451a03';
     const foamColor = isDark ? '#d97706' : '#ffffff';
 
-    // Package (Bottle or Can) SVG path
     let packageSVG = '';
     if (isCan) {
-      // Aluminum Craft Can
       packageSVG = `
         <g class="beer-can">
           <rect x="25" y="45" width="45" height="110" rx="8" fill="url(#canGradient)" stroke="#94a3b8" stroke-width="2"/>
           <rect x="30" y="40" width="35" height="5" rx="2" fill="#cbd5e1"/>
-          <!-- Can Label Art -->
           <rect x="26" y="60" width="43" height="75" fill="${color}" opacity="0.85"/>
-          <text x="47" y="102" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle" font-family="sans-serif">CRAFT</text>
+          <text x="47" y="102" font-size="9" font-weight="bold" fill="#fff" text-anchor="middle" font-family="sans-serif">CRAFT CAN</text>
         </g>
       `;
     } else {
-      // Amber/Green Bottle
       packageSVG = `
         <g class="beer-bottle">
-          <!-- Bottle Neck & Body -->
           <path d="M40,25 L55,25 L55,55 L65,75 L65,155 L30,155 L30,75 L40,55 Z" fill="#451a03" stroke="#f59e0b" stroke-width="1.5" opacity="0.95"/>
-          <!-- Crown Cap -->
           <rect x="38" y="20" width="19" height="7" rx="2" fill="#d97706"/>
-          <!-- Label -->
           <rect x="32" y="85" width="31" height="55" rx="3" fill="${color}" opacity="0.9"/>
-          <text x="47.5" y="116" font-size="9" font-weight="bold" fill="#fff" text-anchor="middle" font-family="sans-serif">ALE</text>
+          <text x="47.5" y="116" font-size="9" font-weight="bold" fill="#fff" text-anchor="middle" font-family="sans-serif">BOTTLE</text>
         </g>
       `;
     }
 
-    // Poured Glass SVG path (Tulip, Snifter, Pint, Flute)
     let glassSVG = `
       <g class="beer-glass">
-        <!-- Glass Body & Liquid -->
         <path d="M110,40 L150,40 L142,150 L118,150 Z" fill="${color}" opacity="0.9"/>
-        <!-- Glass Outline -->
         <path d="M108,35 L152,35 L144,155 L116,155 Z" fill="none" stroke="#e2e8f0" stroke-width="2" opacity="0.6"/>
-        <!-- Glass Base -->
         <ellipse cx="130" cy="155" rx="16" ry="4" fill="#cbd5e1"/>
-        <!-- Foam Head -->
         <path d="M107,38 Q120,25 130,35 Q140,25 153,38 Z" fill="${foamColor}"/>
-        <!-- Bubbles -->
         <circle cx="125" cy="110" r="1.5" fill="#fff" opacity="0.6"/>
         <circle cx="135" cy="85" r="2" fill="#fff" opacity="0.7"/>
         <circle cx="120" cy="65" r="1.5" fill="#fff" opacity="0.6"/>
@@ -636,17 +941,29 @@
   }
 
   // ==========================================================================
-  // Game Setup & Round Cycle
+  // Game Setup & Session No-Duplicate Pool Selector
   // ==========================================================================
   function startNewGame(region) {
     state.selectedRegion = region;
     state.currentRoundIndex = 0;
     state.totalScore = 0;
 
-    const pool = [...BEER_DATABASE[region]];
-    shuffleArray(pool);
-    state.roundsData = pool.slice(0, 5);
+    // Filter out beers already played in current session to prevent duplicates
+    let availablePool = BEER_DATABASE[region].filter(b => !state.playedBeerIds.has(b.id));
 
+    // If pool is running low (< 5), clear session history so pool refreshes cleanly!
+    if (availablePool.length < 5) {
+      state.playedBeerIds.clear();
+      availablePool = [...BEER_DATABASE[region]];
+    }
+
+    shuffleArray(availablePool);
+    state.roundsData = availablePool.slice(0, 5);
+
+    // Record chosen beers in session history
+    state.roundsData.forEach(b => state.playedBeerIds.add(b.id));
+
+    // Position map camera
     if (region === 'NA') {
       state.map.setView([42.0, -96.0], 4);
     } else if (region === 'EU') {
@@ -825,7 +1142,6 @@
     elements.roundPointsEarned.textContent = `+${roundPoints.toLocaleString()} Pts`;
     elements.roundDistanceText.textContent = `Best Try: ${bestDistance.toFixed(1)} miles off`;
 
-    // Render Dynamic Bottle/Can + Glass Visual
     elements.beerVisualContainer.innerHTML = renderBeerVisual(beer);
     elements.revealBeerAbv.textContent = `⚡ ${beer.abv} ABV`;
     elements.revealBeerGlassType.textContent = `🍺 Glass: ${beer.glassType}`;
