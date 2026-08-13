@@ -18,6 +18,17 @@
 </head>
 <body>
 
+  <!-- Custom SVG Cartographic Filter: Obsidian Oceans & Multi-Shaded Gold Topography -->
+  <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
+    <filter id="obsidian-gold-map" color-interpolation-filters="sRGB">
+      <feColorMatrix type="matrix" values="
+        -0.82  0.82  0.45  0.00  0.20
+        -0.72  0.72  0.25  0.00  0.15
+        -0.52  0.52  0.08  0.00  0.02
+         0.00  0.00  0.00  1.00  0.00" />
+    </filter>
+  </svg>
+
   <div id="app">
 
     <!-- Sidebar / HUD Overlay -->
