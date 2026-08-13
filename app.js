@@ -918,7 +918,8 @@
 
     L.control.zoom({ position: 'bottomright' }).addTo(state.map);
 
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    // CartoDB Voyager Tile Layer (Inverted by CSS into Antique Navy & Gold Theme)
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
       subdomains: 'abcd',
       maxZoom: 19
@@ -1025,8 +1026,8 @@
     const pinIcon = L.divIcon({
       className: 'custom-pin-wrapper',
       html: `<div class="custom-pin ${tryClass}" title="Try #${state.attemptIndex}">#${state.attemptIndex}</div>`,
-      iconSize: [32, 32],
-      iconAnchor: [16, 16]
+      iconSize: [34, 34],
+      iconAnchor: [17, 17]
     });
 
     state.activeTryMarker = L.marker(latlng, { icon: pinIcon }).addTo(state.map);
@@ -1104,8 +1105,8 @@
     const actualIcon = L.divIcon({
       className: 'custom-pin-wrapper',
       html: `<div class="custom-pin marker-actual" title="${state.currentBeer.breweryName}">🍺</div>`,
-      iconSize: [42, 42],
-      iconAnchor: [21, 21]
+      iconSize: [44, 44],
+      iconAnchor: [22, 22]
     });
 
     state.actualMarker = L.marker([state.currentBeer.lat, state.currentBeer.lon], { icon: actualIcon }).addTo(state.map);
@@ -1115,10 +1116,10 @@
         [att.latlng.lat, att.latlng.lng],
         [state.currentBeer.lat, state.currentBeer.lon]
       ], {
-        color: '#f59e0b',
+        color: '#d4af74',
         weight: 3,
         dashArray: '6, 6',
-        opacity: 0.8
+        opacity: 0.95
       }).addTo(state.map);
       state.connectorLines.push(line);
     });

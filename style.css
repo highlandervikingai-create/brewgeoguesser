@@ -1,33 +1,33 @@
 /* ==========================================================================
    BrewGeoguesser Design System & Main Stylesheet
-   Theme: Dark Obsidian & Warm Amber Glassmorphic UI
+   Theme: Antique Navy & Gold World Cartography (High Readability)
    ========================================================================== */
 
 :root {
   /* Colors */
-  --bg-dark: #080b11;
-  --panel-bg: rgba(15, 23, 42, 0.84);
-  --panel-border: rgba(255, 255, 255, 0.1);
-  --card-bg: rgba(30, 41, 59, 0.65);
-  --card-border: rgba(255, 255, 255, 0.08);
+  --bg-dark: #060e18; /* Deep Midnight Navy Ocean Base */
+  --panel-bg: rgba(7, 18, 34, 0.88);
+  --panel-border: rgba(212, 175, 118, 0.2);
+  --card-bg: rgba(15, 30, 52, 0.75);
+  --card-border: rgba(212, 175, 118, 0.15);
 
-  --primary: #f59e0b; /* Amber Gold */
-  --primary-hover: #d97706;
-  --primary-glow: rgba(245, 158, 11, 0.35);
+  --primary: #d4af74; /* Warm Antique Gold */
+  --primary-hover: #b89154;
+  --primary-glow: rgba(212, 175, 118, 0.4);
 
-  --accent-blue: #3b82f6;
+  --accent-blue: #38bdf8;
   --success: #10b981;
   --danger: #ef4444;
 
   --text-main: #f8fafc;
-  --text-muted: #94a3b8;
-  --text-dim: #64748b;
+  --text-muted: #cbd5e1;
+  --text-dim: #94a3b8;
 
   /* Fonts */
   --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 
-  --glass-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+  --glass-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.85);
   --radius-lg: 16px;
   --radius-md: 10px;
   --radius-sm: 6px;
@@ -80,7 +80,7 @@ html, body {
 .brand-header {
   padding: 20px;
   border-bottom: 1px solid var(--panel-border);
-  background: linear-gradient(180deg, rgba(245, 158, 11, 0.08) 0%, rgba(0, 0, 0, 0) 100%);
+  background: linear-gradient(180deg, rgba(212, 175, 118, 0.12) 0%, rgba(0, 0, 0, 0) 100%);
 }
 
 .logo-wrapper {
@@ -91,7 +91,7 @@ html, body {
 
 .logo-icon {
   font-size: 2.2rem;
-  background: rgba(245, 158, 11, 0.15);
+  background: rgba(212, 175, 118, 0.15);
   padding: 10px;
   border-radius: var(--radius-md);
   border: 1px solid var(--primary-glow);
@@ -128,7 +128,7 @@ html, body {
   font-family: var(--font-heading);
   font-size: 1.15rem;
   font-weight: 800;
-  color: var(--text-main);
+  color: var(--primary);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -163,7 +163,7 @@ html, body {
 }
 
 .region-card:hover {
-  background: rgba(245, 158, 11, 0.12);
+  background: rgba(212, 175, 118, 0.15);
   border-color: var(--primary);
   transform: translateY(-2px);
   box-shadow: 0 8px 25px var(--primary-glow);
@@ -199,7 +199,7 @@ html, body {
 }
 
 .rules-card {
-  background: rgba(15, 23, 42, 0.6);
+  background: rgba(7, 18, 34, 0.7);
   border: 1px solid var(--panel-border);
   padding: 16px;
   border-radius: var(--radius-md);
@@ -261,11 +261,11 @@ html, body {
 
 /* Target Beer Card */
 .target-beer-card {
-  background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.9) 100%);
+  background: linear-gradient(135deg, rgba(15, 30, 52, 0.95) 0%, rgba(7, 18, 34, 0.95) 100%);
   border: 1px solid var(--primary-glow);
   padding: 18px;
   border-radius: var(--radius-lg);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -308,7 +308,7 @@ html, body {
 
 /* 3-Attempt Tracker & History */
 .attempt-tracker-card {
-  background: rgba(15, 23, 42, 0.6);
+  background: rgba(7, 18, 34, 0.7);
   border: 1px solid var(--card-border);
   padding: 14px;
   border-radius: var(--radius-md);
@@ -354,7 +354,7 @@ html, body {
 }
 
 .try-pill.done {
-  background: rgba(16, 185, 129, 0.15);
+  background: rgba(16, 185, 129, 0.18);
   border-color: #10b981;
   color: #10b981;
 }
@@ -424,7 +424,7 @@ html, body {
 
 .btn-primary {
   background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
-  color: #000;
+  color: #060e18;
   box-shadow: 0 4px 15px var(--primary-glow);
 }
 
@@ -466,18 +466,32 @@ html, body {
 }
 
 /* ==========================================================================
-   Map Canvas & 3-Try Markers
+   Map Canvas & Custom Antique Navy/Gold Color Scheme
    ========================================================================== */
 #map-container {
   flex: 1;
   height: 100%;
   position: relative;
+  background: #060e18;
 }
 
 #map {
   width: 100%;
   height: 100%;
-  background: var(--bg-dark);
+  background: #060e18;
+}
+
+/* 🎨 THE WORLD VINTAGE MAP COLOR FILTER: Deep Midnight Navy Ocean + Warm Antique Gold Landmasses */
+#map .leaflet-tile-pane {
+  filter: invert(0.96) hue-rotate(188deg) sepia(0.85) saturate(2.1) contrast(1.25) brightness(0.82);
+}
+
+/* Ensure map markers, popups, lines, and controls remain 100% crisp and unfiltered! */
+.leaflet-control-container,
+.leaflet-marker-pane,
+.leaflet-popup-pane,
+.leaflet-overlay-pane {
+  filter: none !important;
 }
 
 /* Custom Leaflet Marker Pins */
@@ -492,45 +506,45 @@ html, body {
 }
 
 .marker-try-1 {
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   background: #ef4444;
   border: 2px solid #fff;
-  box-shadow: 0 0 15px rgba(239, 68, 68, 0.8);
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.9);
   color: #fff;
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   animation: bounceIn 0.3s ease;
 }
 
 .marker-try-2 {
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   background: #f97316;
   border: 2px solid #fff;
-  box-shadow: 0 0 15px rgba(249, 115, 22, 0.8);
+  box-shadow: 0 0 15px rgba(249, 115, 22, 0.9);
   color: #fff;
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   animation: bounceIn 0.3s ease;
 }
 
 .marker-try-3 {
-  width: 32px;
-  height: 32px;
-  background: #a855f7;
+  width: 34px;
+  height: 34px;
+  background: #eab308;
   border: 2px solid #fff;
-  box-shadow: 0 0 15px rgba(168, 85, 247, 0.8);
-  color: #fff;
-  font-size: 0.8rem;
+  box-shadow: 0 0 15px rgba(234, 179, 8, 0.9);
+  color: #000;
+  font-size: 0.82rem;
   animation: bounceIn 0.3s ease;
 }
 
 .marker-actual {
-  width: 42px;
-  height: 42px;
-  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, #d4af74 0%, #b89154 100%);
   border: 2px solid #fff;
-  box-shadow: 0 0 25px rgba(245, 158, 11, 0.9);
-  font-size: 1.3rem;
+  box-shadow: 0 0 30px rgba(212, 175, 118, 0.95);
+  font-size: 1.35rem;
   animation: bounceIn 0.5s ease;
 }
 
@@ -539,7 +553,7 @@ html, body {
   top: 24px;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(15, 23, 42, 0.92);
+  background: rgba(7, 18, 34, 0.94);
   backdrop-filter: blur(12px);
   border: 1px solid var(--panel-border);
   padding: 12px 24px;
@@ -561,7 +575,7 @@ html, body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.82);
+  background: rgba(4, 9, 17, 0.84);
   backdrop-filter: blur(10px);
   display: flex;
   align-items: center;
@@ -571,9 +585,9 @@ html, body {
 }
 
 .glass-card {
-  background: rgba(15, 23, 42, 0.96);
+  background: rgba(7, 18, 34, 0.96);
   border: 1px solid var(--panel-border);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.85);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9);
   border-radius: var(--radius-lg);
   padding: 28px;
   max-width: 540px;
@@ -595,7 +609,7 @@ html, body {
 }
 
 .score-pill {
-  background: rgba(245, 158, 11, 0.15);
+  background: rgba(212, 175, 118, 0.15);
   border: 1px solid var(--primary);
   padding: 10px 24px;
   border-radius: 30px;
@@ -625,7 +639,7 @@ html, body {
 
 /* Beer Visual Showcase Card (Bottle/Can + Glass) */
 .beer-showcase-card {
-  background: linear-gradient(180deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.95) 100%);
+  background: linear-gradient(180deg, rgba(15, 30, 52, 0.85) 0%, rgba(7, 18, 34, 0.98) 100%);
   border: 1px solid var(--primary-glow);
   border-radius: var(--radius-md);
   padding: 14px;
@@ -661,7 +675,6 @@ html, body {
   transform: scale(1.03);
 }
 
-/* Dynamic SVG Rendered Bottle & Glass Pair */
 .svg-beer-pair {
   display: flex;
   align-items: flex-end;
@@ -772,7 +785,7 @@ html, body {
 }
 
 .final-score-display {
-  background: rgba(245, 158, 11, 0.12);
+  background: rgba(212, 175, 118, 0.15);
   border: 1px solid var(--primary-glow);
   padding: 14px;
   border-radius: var(--radius-md);
