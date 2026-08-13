@@ -918,8 +918,8 @@
 
     L.control.zoom({ position: 'bottomright' }).addTo(state.map);
 
-    // CartoDB Voyager Tile Layer (Inverted by CSS into Obsidian & Multi-Shaded Gold Theme)
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+    // CartoDB Dark Matter Tile Layer (Filtered by SVG matrix into Obsidian Oceans & Multi-Shaded Gold Terrain)
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
       subdomains: 'abcd',
       maxZoom: 19
