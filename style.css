@@ -144,15 +144,15 @@ html, body {
 }
 
 /* ==========================================================================
-   Region Selection Cards
+   Timer Selection Cards
    ========================================================================== */
-.region-grid {
+.timer-grid {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.region-card {
+.timer-card {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   padding: 14px 16px;
@@ -165,18 +165,18 @@ html, body {
   transition: all var(--transition-smooth);
 }
 
-.region-card:hover {
+.timer-card:hover {
   background: rgba(212, 175, 55, 0.15);
   border-color: var(--primary);
   transform: translateY(-2px);
   box-shadow: 0 8px 25px var(--primary-glow);
 }
 
-.flag-icon {
+.timer-icon {
   font-size: 2.2rem;
 }
 
-.region-info h3 {
+.timer-info h3 {
   font-family: var(--font-heading);
   font-size: 1.05rem;
   font-weight: 700;
@@ -186,19 +186,35 @@ html, body {
   gap: 8px;
 }
 
-.difficulty-tag {
-  background: rgba(239, 68, 68, 0.2);
-  border: 1px solid #ef4444;
-  color: #f87171;
-  padding: 1px 6px;
-  border-radius: 8px;
-  font-size: 0.65rem;
+.timer-info span {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.mode-tag {
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 0.68rem;
+  font-weight: 800;
   text-transform: uppercase;
 }
 
-.region-info span {
-  font-size: 0.75rem;
-  color: var(--text-muted);
+.mode-tag.casual {
+  background: rgba(16, 185, 129, 0.2);
+  border: 1px solid #10b981;
+  color: #34d399;
+}
+
+.mode-tag.standard {
+  background: rgba(245, 158, 11, 0.2);
+  border: 1px solid #f59e0b;
+  color: #fbbf24;
+}
+
+.mode-tag.expert {
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid #ef4444;
+  color: #f87171;
 }
 
 .rules-card {
@@ -239,12 +255,12 @@ html, body {
   border-radius: var(--radius-md);
 }
 
-.round-badge, .score-badge {
+.round-badge, .score-badge, .timer-badge {
   display: flex;
   flex-direction: column;
 }
 
-.round-badge span, .score-badge span {
+.round-badge span, .score-badge span, .timer-badge span {
   font-size: 0.7rem;
   color: var(--text-muted);
   text-transform: uppercase;
@@ -260,6 +276,25 @@ html, body {
 
 .score-badge strong {
   color: var(--primary);
+}
+
+/* HUD Timer Badge */
+.timer-num {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--primary);
+  transition: color 0.3s ease;
+}
+
+.timer-num.warning {
+  color: #ef4444 !important;
+  animation: pulseRed 0.8s infinite alternate;
+}
+
+@keyframes pulseRed {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.12); opacity: 0.75; }
 }
 
 /* Target Beer Card */

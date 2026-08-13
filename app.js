@@ -677,11 +677,14 @@
   ];
 
   // ==========================================================================
-  // Global Game State & Session Duplicate Prevention Tracker
+  // Global Game State & Session Duplicate Tracker
   // ==========================================================================
   const state = {
     map: null,
-    selectedRegion: 'NA',
+    selectedTimerSeconds: 60,
+    currentTimerSeconds: 60,
+    timerInterval: null,
+    
     currentRoundIndex: 0,
     totalScore: 0,
     roundsData: [],
@@ -703,9 +706,10 @@
   // DOM Elements
   // ==========================================================================
   const elements = {
-    regionScreen: document.getElementById('region-screen'),
+    timerScreen: document.getElementById('timer-screen'),
     gameHud: document.getElementById('game-hud'),
     roundNum: document.getElementById('round-num'),
+    timerDisplay: document.getElementById('timer-display'),
     totalScoreDisplay: document.getElementById('total-score-display'),
     targetBeerStyle: document.getElementById('target-beer-style'),
     targetBeerName: document.getElementById('target-beer-name'),
@@ -794,6 +798,14 @@
         gain.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
         osc.start(now);
         osc.stop(now + 0.5);
+      } else if (type === 'timeWarning') {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(300, now);
+        osc.frequency.setValueAtTime(200, now + 0.15);
+        gain.gain.setValueAtTime(0.25, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+        osc.start(now);
+        osc.stop(now + 0.35);
       }
     } catch (e) {
       console.warn('Audio playback error:', e);
@@ -801,7 +813,7 @@
   }
 
   // ==========================================================================
-  // Haversine Distance & Tighter Scoring Engine
+  // Haversine Distance & Scoring Engine (With Time Penalty System)
   // ==========================================================================
   function toRad(degrees) {
     return degrees * (Math.PI / 180);
@@ -818,7 +830,7 @@
     return R * c;
   }
 
-  function calculateScore(bestDistanceMiles, attemptsData) {
+  function calculateScore(bestDistanceMiles, attemptsData, penaltyPoints = 0) {
     let points = 0;
 
     if (bestDistanceMiles <= 5) points = 5000;
@@ -833,7 +845,8 @@
       points += 250;
     }
 
-    return Math.min(5000, points);
+    const finalPoints = Math.max(0, points - penaltyPoints);
+    return Math.min(5000, finalPoints);
   }
 
   // ==========================================================================
@@ -911,8 +924,8 @@
 
   function initMap() {
     state.map = L.map('map', {
-      center: [45.0, -95.0],
-      zoom: 4,
+      center: [20.0, 10.0],
+      zoom: 2,
       zoomControl: false
     });
 
@@ -932,38 +945,38 @@
   }
 
   function bindEvents() {
-    document.querySelectorAll('.region-card').forEach(card => {
+    document.querySelectorAll('.timer-card').forEach(card => {
       card.addEventListener('click', () => {
-        const region = card.getAttribute('data-region');
-        startNewGame(region);
+        const timerSecs = parseInt(card.getAttribute('data-timer'), 10);
+        startNewGame(timerSecs);
       });
     });
 
     elements.btnSubmitGuess.addEventListener('click', submitAttempt);
-    elements.btnChangeCountry.addEventListener('click', resetToRegionSelection);
+    elements.btnChangeCountry.addEventListener('click', resetToTimerSelection);
     elements.btnNextRound.addEventListener('click', advanceToNextRound);
 
     elements.btnPlayAgain.addEventListener('click', () => {
       elements.summaryModal.classList.add('hidden');
-      startNewGame(state.selectedRegion);
+      startNewGame(state.selectedTimerSeconds);
     });
 
     elements.btnShareScore.addEventListener('click', shareFinalScore);
   }
 
   // ==========================================================================
-  // Game Setup & Session No-Duplicate Pool Selector
+  // Game Setup & Global "The World" Pool Selector
   // ==========================================================================
-  function startNewGame(region) {
-    state.selectedRegion = region;
+  function startNewGame(timerSeconds) {
+    state.selectedTimerSeconds = timerSeconds;
     state.currentRoundIndex = 0;
     state.totalScore = 0;
 
-    let availablePool = BEER_DATABASE[region].filter(b => !state.playedBeerIds.has(b.id));
+    let availablePool = BEER_DATABASE.WORLD.filter(b => !state.playedBeerIds.has(b.id));
 
     if (availablePool.length < 5) {
       state.playedBeerIds.clear();
-      availablePool = [...BEER_DATABASE[region]];
+      availablePool = [...BEER_DATABASE.WORLD];
     }
 
     shuffleArray(availablePool);
@@ -971,15 +984,9 @@
 
     state.roundsData.forEach(b => state.playedBeerIds.add(b.id));
 
-    if (region === 'NA') {
-      state.map.setView([42.0, -96.0], 4);
-    } else if (region === 'EU') {
-      state.map.setView([51.5, 10.0], 4);
-    } else {
-      state.map.setView([20.0, 10.0], 2);
-    }
+    state.map.setView([20.0, 10.0], 2);
 
-    elements.regionScreen.classList.add('hidden');
+    elements.timerScreen.classList.add('hidden');
     elements.gameHud.classList.remove('hidden');
     elements.totalScoreDisplay.textContent = '0';
 
@@ -1008,7 +1015,69 @@
     elements.submitBtnText.textContent = 'Submit Try #1';
     elements.guessPromptText.innerHTML = `<span>📍 Click anywhere on the map to place your pin for <strong>Try #1</strong>!</span>`;
 
-    showToast(`Round ${roundIndex + 1}: Find the brewery for "${state.currentBeer.beerName}"!`, 3500);
+    startRoundTimer();
+
+    showToast(`Round ${roundIndex + 1}: Find the brewery for "${state.currentBeer.beerName}"! (${state.selectedTimerSeconds}s limit)`, 3500);
+  }
+
+  // ==========================================================================
+  // Countdown Timer System
+  // ==========================================================================
+  function startRoundTimer() {
+    stopRoundTimer();
+
+    state.currentTimerSeconds = state.selectedTimerSeconds;
+    updateTimerDisplay();
+
+    state.timerInterval = setInterval(() => {
+      state.currentTimerSeconds--;
+      updateTimerDisplay();
+
+      if (state.currentTimerSeconds <= 10 && state.currentTimerSeconds > 0) {
+        elements.timerDisplay.classList.add('warning');
+      }
+
+      if (state.currentTimerSeconds <= 0) {
+        handleTimeExpired();
+      }
+    }, 1000);
+  }
+
+  function stopRoundTimer() {
+    if (state.timerInterval) {
+      clearInterval(state.timerInterval);
+      state.timerInterval = null;
+    }
+    if (elements.timerDisplay) {
+      elements.timerDisplay.classList.remove('warning');
+    }
+  }
+
+  function updateTimerDisplay() {
+    if (elements.timerDisplay) {
+      elements.timerDisplay.textContent = `${state.currentTimerSeconds}s`;
+    }
+  }
+
+  function handleTimeExpired() {
+    stopRoundTimer();
+    playSound('timeWarning');
+
+    let penaltyPoints = 0;
+    const attemptsCount = state.attemptsData.length;
+
+    if (attemptsCount === 2) {
+      penaltyPoints = 100;
+      showToast('⏱️ Time Expired! 2 guesses locked (-100 pt penalty).', 3500);
+    } else if (attemptsCount === 1) {
+      penaltyPoints = 500;
+      showToast('⏱️ Time Expired! Only 1 guess locked (-500 pt penalty).', 3500);
+    } else {
+      penaltyPoints = 5000;
+      showToast('⏱️ Time Expired! No guesses placed (0 pts earned).', 3500);
+    }
+
+    finishRound(false, penaltyPoints);
   }
 
   // ==========================================================================
@@ -1070,7 +1139,7 @@
     const isLastTry = state.attemptIndex >= 3;
 
     if (isBullseye || isLastTry) {
-      finishRound(isBullseye);
+      finishRound(isBullseye, 0);
     } else {
       playSound('trySubmit');
       
@@ -1092,9 +1161,15 @@
     }
   }
 
-  function finishRound(isBullseye) {
-    let bestDistance = Math.min(...state.attemptsData.map(a => a.distanceMiles));
-    const roundPoints = calculateScore(bestDistance, state.attemptsData);
+  function finishRound(isBullseye, penaltyPoints = 0) {
+    stopRoundTimer();
+
+    let bestDistance = 99999;
+    if (state.attemptsData.length > 0) {
+      bestDistance = Math.min(...state.attemptsData.map(a => a.distanceMiles));
+    }
+
+    const roundPoints = calculateScore(bestDistance, state.attemptsData, penaltyPoints);
 
     state.totalScore += roundPoints;
     elements.totalScoreDisplay.textContent = state.totalScore.toLocaleString();
@@ -1124,9 +1199,13 @@
       state.connectorLines.push(line);
     });
 
-    const allPoints = state.attemptsData.map(a => a.latlng);
-    allPoints.push([state.currentBeer.lat, state.currentBeer.lon]);
-    state.map.fitBounds(L.latLngBounds(allPoints), { padding: [80, 80], duration: 1.2 });
+    if (state.attemptsData.length > 0) {
+      const allPoints = state.attemptsData.map(a => a.latlng);
+      allPoints.push([state.currentBeer.lat, state.currentBeer.lon]);
+      state.map.fitBounds(L.latLngBounds(allPoints), { padding: [80, 80], duration: 1.2 });
+    } else {
+      state.map.setView([state.currentBeer.lat, state.currentBeer.lon], 6, { animate: true });
+    }
 
     if (isBullseye) {
       playSound('bullseye');
@@ -1136,18 +1215,24 @@
     }
 
     setTimeout(() => {
-      showRevealModal(bestDistance, roundPoints);
+      showRevealModal(bestDistance, roundPoints, penaltyPoints);
     }, 1200);
   }
 
   // ==========================================================================
   // Reveal Modal & Visual Showcase
   // ==========================================================================
-  function showRevealModal(bestDistance, roundPoints) {
+  function showRevealModal(bestDistance, roundPoints, penaltyPoints) {
     const beer = state.currentBeer;
 
     elements.roundPointsEarned.textContent = `+${roundPoints.toLocaleString()} Pts`;
-    elements.roundDistanceText.textContent = `Best Try: ${bestDistance.toFixed(1)} miles off`;
+    
+    if (bestDistance > 9000) {
+      elements.roundDistanceText.textContent = `Time Expired (No Guess Made)`;
+    } else {
+      const penaltyNotice = penaltyPoints > 0 ? ` (Penalty -${penaltyPoints} pts)` : '';
+      elements.roundDistanceText.textContent = `Best Try: ${bestDistance.toFixed(1)} miles off${penaltyNotice}`;
+    }
 
     elements.beerVisualContainer.innerHTML = renderBeerVisual(beer);
     elements.revealBeerAbv.textContent = `⚡ ${beer.abv} ABV`;
@@ -1172,6 +1257,7 @@
   }
 
   function triggerEndGameSummary() {
+    stopRoundTimer();
     clearMapLayers();
 
     const score = state.totalScore;
@@ -1193,16 +1279,17 @@
       elements.summaryMedalImg.src = medalImg;
     }
     elements.summaryRankTitle.textContent = rankTitle;
-    elements.summarySubtitle.textContent = `Completed 5 Rounds in ${getRegionName(state.selectedRegion)}`;
+    elements.summarySubtitle.textContent = `Completed 5 Rounds in The World (${state.selectedTimerSeconds}s Mode)`;
     elements.summaryFinalScore.textContent = score.toLocaleString();
 
     elements.summaryRoundList.innerHTML = '';
     state.roundsData.forEach((b, index) => {
       const li = document.createElement('li');
       li.className = 'summary-round-item';
+      const distStr = (b.userBestDistance || 0) > 9000 ? 'Time Expired' : `${(b.userBestDistance || 0).toFixed(0)} mi`;
       li.innerHTML = `
         <span class="round-item-title">R${index + 1}: ${b.beerName} (${b.city})</span>
-        <span class="round-item-score">+${(b.userPoints || 0).toLocaleString()} pts (${(b.userBestDistance || 0).toFixed(0)} mi)</span>
+        <span class="round-item-score">+${(b.userPoints || 0).toLocaleString()} pts (${distStr})</span>
       `;
       elements.summaryRoundList.appendChild(li);
     });
@@ -1214,16 +1301,11 @@
     elements.summaryModal.classList.remove('hidden');
   }
 
-  function getRegionName(code) {
-    if (code === 'NA') return 'North America';
-    if (code === 'EU') return 'Europe';
-    return 'The World';
-  }
-
-  function resetToRegionSelection() {
+  function resetToTimerSelection() {
+    stopRoundTimer();
     clearMapLayers();
     elements.gameHud.classList.add('hidden');
-    elements.regionScreen.classList.remove('hidden');
+    elements.timerScreen.classList.remove('hidden');
     elements.revealModal.classList.add('hidden');
     elements.summaryModal.classList.add('hidden');
   }
@@ -1253,7 +1335,7 @@
   }
 
   function shareFinalScore() {
-    const text = `🍺 BrewGeoguesser (${getRegionName(state.selectedRegion)}): I scored ${state.totalScore.toLocaleString()} / 25,000 pts with 3-try triangulation! Can you beat my score?`;
+    const text = `🍺 BrewGeoguesser (The World - ${state.selectedTimerSeconds}s Mode): I scored ${state.totalScore.toLocaleString()} / 25,000 pts with 3-try triangulation! Can you beat my score?`;
     if (navigator.clipboard) {
       navigator.clipboard.writeText(text).then(() => {
         showToast('Result copied to clipboard!', 3000);

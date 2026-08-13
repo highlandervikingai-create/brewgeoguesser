@@ -45,44 +45,49 @@
         </div>
       </header>
 
-      <!-- 1. Region Selection Screen -->
-      <section id="region-screen" class="panel-section">
-        <h2 class="section-title">Select Discovery Region</h2>
-        <p class="section-desc">Choose a region to test your skills and discover amazing craft beers!</p>
+      <!-- 1. Difficulty & Timer Mode Selection Screen -->
+      <section id="timer-screen" class="panel-section">
+        <h2 class="section-title">Select Challenge Speed</h2>
+        <p class="section-desc">Test your global craft beer knowledge against the clock in <strong>The World</strong>!</p>
 
-        <div class="region-grid">
-          <button class="region-card" data-region="NA">
-            <span class="flag-icon">🌎</span>
-            <div class="region-info">
-              <h3>North America</h3>
-              <span>United States, Canada & Mexico Craft Beers</span>
+        <div class="timer-grid">
+          <button class="timer-card" data-timer="90">
+            <span class="timer-icon">🕒</span>
+            <div class="timer-info">
+              <h3>Casual <small class="mode-tag casual">90s</small></h3>
+              <span>90 Seconds per Beer Round</span>
             </div>
           </button>
 
-          <button class="region-card" data-region="EU">
-            <span class="flag-icon">🌍</span>
-            <div class="region-info">
-              <h3>Europe</h3>
-              <span>UK, Germany, Belgium, Czechia & Netherlands</span>
+          <button class="timer-card" data-timer="60">
+            <span class="timer-icon">⚡</span>
+            <div class="timer-info">
+              <h3>Standard <small class="mode-tag standard">60s</small></h3>
+              <span>60 Seconds per Beer Round</span>
             </div>
           </button>
 
-          <button class="region-card" data-region="WORLD">
-            <span class="flag-icon">🌐</span>
-            <div class="region-info">
-              <h3>The World <small class="difficulty-tag">Hard</small></h3>
-              <span>Global Craft Beers (NA, Europe, Australia, Japan & Beyond)</span>
+          <button class="timer-card" data-timer="30">
+            <span class="timer-icon">🔥</span>
+            <div class="timer-info">
+              <h3>Expert <small class="mode-tag expert">30s</small></h3>
+              <span>30 Seconds per Beer Round (High Pressure!)</span>
             </div>
           </button>
         </div>
 
         <div class="rules-card">
-          <h4>🎯 3-Try Rules:</h4>
+          <h4>🎯 3-Try & Time Rules:</h4>
           <ul>
-            <li>You get <strong>3 attempts</strong> per beer round to pinpoint the brewery.</li>
-            <li>Each try reports your <strong>Distance Off</strong> (no direction is given!).</li>
-            <li>Use your 3 distance clues to visually <strong>triangulate</strong> the brewery.</li>
-            <li>Hit within 5 miles for an instant <strong>5,000 pt Bullseye!</strong></li>
+            <li>You play with <strong>Global Craft Beers</strong> across The World!</li>
+            <li>Get <strong>3 attempts</strong> per beer to triangulate distance off.</li>
+            <li>Each beer round has a <strong>Countdown Timer</strong>.</li>
+            <li><strong>Time Expiration Penalties:</strong>
+              <br>• 2 guesses made: <strong>-100 pt penalty</strong>
+              <br>• 1 guess made: <strong>-500 pt penalty</strong>
+              <br>• 0 guesses made: <strong>0 pts</strong>
+            </li>
+            <li>Timer resets back to full for each new beer round!</li>
           </ul>
         </div>
       </section>
@@ -94,6 +99,10 @@
           <div class="round-badge">
             <span>Round</span>
             <strong id="round-num">1</strong> / 5
+          </div>
+          <div class="timer-badge">
+            <span>Time Left</span>
+            <strong id="timer-display" class="timer-num">60s</strong>
           </div>
           <div class="score-badge">
             <span>Total Score</span>
