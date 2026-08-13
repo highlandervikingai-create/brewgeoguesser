@@ -736,7 +736,7 @@
     btnNextRound: document.getElementById('btn-next-round'),
     
     summaryModal: document.getElementById('summary-modal'),
-    summaryRankIcon: document.getElementById('summary-rank-icon'),
+    summaryMedalImg: document.getElementById('summary-medal-img'),
     summaryRankTitle: document.getElementById('summary-rank-title'),
     summarySubtitle: document.getElementById('summary-subtitle'),
     summaryFinalScore: document.getElementById('summary-final-score'),
@@ -918,7 +918,7 @@
 
     L.control.zoom({ position: 'bottomright' }).addTo(state.map);
 
-    // CartoDB Voyager Tile Layer (Inverted by CSS into Antique Navy & Gold Theme)
+    // CartoDB Voyager Tile Layer (Inverted by CSS into Obsidian & Multi-Shaded Gold Theme)
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
       subdomains: 'abcd',
@@ -1116,7 +1116,7 @@
         [att.latlng.lat, att.latlng.lng],
         [state.currentBeer.lat, state.currentBeer.lon]
       ], {
-        color: '#d4af74',
+        color: '#d4af37',
         weight: 3,
         dashArray: '6, 6',
         opacity: 0.95
@@ -1175,21 +1175,23 @@
     clearMapLayers();
 
     const score = state.totalScore;
-    let rankIcon = '🥉';
-    let rankTitle = 'Pub Crawler';
+    let medalImg = 'assets/medal_bronze.jpg';
+    let rankTitle = 'Bronze Craft Apprentice';
 
-    if (score >= 22000) {
-      rankIcon = '👑';
-      rankTitle = 'Master Brewmaster';
-    } else if (score >= 16000) {
-      rankIcon = '🥇';
-      rankTitle = 'Craft Connoisseur';
-    } else if (score >= 10000) {
-      rankIcon = '🥈';
-      rankTitle = 'Ale Explorer';
+    if (score >= 18000) {
+      medalImg = 'assets/medal_gold.jpg';
+      rankTitle = 'Gold Master Brewmaster';
+    } else if (score >= 12000) {
+      medalImg = 'assets/medal_silver.jpg';
+      rankTitle = 'Silver Ale Explorer';
+    } else {
+      medalImg = 'assets/medal_bronze.jpg';
+      rankTitle = 'Bronze Craft Apprentice';
     }
 
-    elements.summaryRankIcon.textContent = rankIcon;
+    if (elements.summaryMedalImg) {
+      elements.summaryMedalImg.src = medalImg;
+    }
     elements.summaryRankTitle.textContent = rankTitle;
     elements.summarySubtitle.textContent = `Completed 5 Rounds in ${getRegionName(state.selectedRegion)}`;
     elements.summaryFinalScore.textContent = score.toLocaleString();
@@ -1205,7 +1207,7 @@
       elements.summaryRoundList.appendChild(li);
     });
 
-    if (score >= 18000 && window.confetti) {
+    if (score >= 16000 && window.confetti) {
       confetti({ particleCount: 110, spread: 90, origin: { y: 0.5 } });
     }
 

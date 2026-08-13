@@ -7,9 +7,9 @@
   /* Colors */
   --bg-dark: #080a0f; /* Deep Obsidian Ocean Base */
   --panel-bg: rgba(8, 10, 15, 0.90);
-  --panel-border: rgba(212, 175, 118, 0.22);
+  --panel-border: rgba(212, 175, 55, 0.22);
   --card-bg: rgba(15, 20, 30, 0.80);
-  --card-border: rgba(212, 175, 118, 0.18);
+  --card-border: rgba(212, 175, 55, 0.18);
 
   --primary: #d4af37; /* Metallic Gold */
   --primary-hover: #b89128;
@@ -762,7 +762,7 @@ html, body {
   font-size: 1rem;
 }
 
-/* Summary Modal */
+/* Summary Modal & Find The Brewery Award Medals */
 .summary-card {
   text-align: center;
   display: flex;
@@ -770,9 +770,20 @@ html, body {
   gap: 18px;
 }
 
-.modal-emoji {
-  font-size: 3.5rem;
-  display: block;
+.summary-medal-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+
+.summary-medal-img {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid var(--primary);
+  box-shadow: 0 0 30px var(--primary-glow);
+  animation: bounceIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .modal-header h2 {
